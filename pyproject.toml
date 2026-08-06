@@ -7,4 +7,5 @@ requires-python = ">=3.14"
 dependencies = [
     "mlx>=0.32.0",
     "mlx-lm>=0.31.3",
+    "pyyaml>=6.0.3",
 ]

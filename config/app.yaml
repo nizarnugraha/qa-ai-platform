@@ -1,0 +1,7 @@
+environment: local
+
+provider: mlx
+
+active_model: qwen
+
+log_level: INFO
