@@ -1,5 +1,4 @@
 from typing import Any
-import os
 
 import httpx
 
@@ -12,17 +11,12 @@ class MLXClient:
     def __init__(
         self,
         base_url: str = "http://127.0.0.1:8080/v1",
-        model: str = os.getenv(
-            "MLX_MODEL",
-             "mlx-community/Qwen2.5-Coder-14B-Instruct-4bit",
-        ),
+        model: str = "mlx-community/Qwen2.5-Coder-7B-Instruct-4bit",
         timeout: float = 120.0,
     ):
         self.base_url = base_url
         self.model = model
         self.timeout = timeout
-
-        print(f"MLX MODEL: {self.model}")
 
     def health(self) -> dict[str, Any]:
         """

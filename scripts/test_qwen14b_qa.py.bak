@@ -1,0 +1,57 @@
+from backend.app.llm.mlx_client import MLXClient
+
+
+client = MLXClient()
+
+prompt = """
+You are a Senior QA Automation Engineer.
+
+Analyze this CodeceptJS/Appium test failure.
+
+Test:
+User transfer with RTOL and input wrong PIN
+
+Failure:
+Expected: "Rp 5000000"
+Actual:   "Rp5000000"
+
+Relevant code:
+
+const actualAmount = await transferPage.getAmountConfirmation();
+
+// Convert actualAmount and expected amount to string and normalize the format
+const formattedActualAmount = actualAmount.replace(/\\./g, '');
+
+// Convert number to string and remove separators if present
+const formattedExpectedAmount =
+  "Rp" + String(globalVariable.transfer.amount).replace(/\\./g, '');
+
+I.assertEqual(formattedActualAmount, formattedExpectedAmount);
+
+Do NOT modify any files.
+Do NOT execute commands.
+Do NOT commit anything.
+
+Determine:
+
+1. Root cause
+2. Failure classification
+3. Exact line that should change
+4. Proposed old code
+5. Proposed new code
+6. Why the proposed fix is safe
+7. How to validate the fix
+
+Return the answer concisely.
+"""
+
+answer = client.chat(
+    prompt,
+    temperature=0.1,
+    max_tokens=1024,
+)
+
+print("=" * 60)
+print("QWEN 14B QA RCA")
+print("=" * 60)
+print(answer)
